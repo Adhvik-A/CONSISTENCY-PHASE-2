@@ -1,55 +1,42 @@
 import math
 
 
-# -----------------------------
-# Mean (p)
-# -----------------------------
 def calculate_mean(runs, n):
     return sum(runs) / n
 
 
-# -----------------------------
-# Standard Deviation (q)
-# -----------------------------
 def calculate_std(runs, mean, n):
-    variance = sum((x - mean) ** 2 for x in runs) / n
-    return math.sqrt(variance)
+    return math.sqrt(sum((x - mean) ** 2 for x in runs) / n)
 
 
-# -----------------------------
-# Dynamic Failure Rate (r)
-# -----------------------------
-def calculate_failure_rate(runs, mean, n):
-    alpha = 0.5
-    T = alpha * mean
+def calculate_failure_rate(runs, mean, wickets):
+    n = len(runs)
+    T = mean / 2
 
     if T == 0:
         return 0
 
-    scores = [max(0, (T - x) / T) for x in runs]
-    return sum(scores) / n
+    total = 0
+
+    for x, w in zip(runs, wickets):
+
+        base = max(0, (T - x) / T)
+
+        # wicket impact
+        weight = 1.2 if w == 1 else 0.7
+
+        total += base * weight
+
+    return total / n
 
 
-# -----------------------------
-# Final BCI
-# -----------------------------
-def calculate_bci(mean, std, failure):
-
-    if mean == 0:
+def calculate_bci(p, q, r):
+    if p == 0:
         return 0
-
-    rel_vol = std / mean
-    stability = 1 - rel_vol
-    reliability = 1 - failure
-
-    return stability * reliability * 100
+    return (1 - q / p) * (1 - r) * 100
 
 
-# -----------------------------
-# Label Generator
-# -----------------------------
-def get_consistency_label(bci):
-
+def get_label(bci):
     if bci >= 70:
         return "Highly Consistent"
     elif bci >= 50:
@@ -58,3 +45,14 @@ def get_consistency_label(bci):
         return "Moderately Consistent"
     else:
         return "Unstable"
+
+
+def get_statement(label):
+    if label == "Highly Consistent":
+        return "The player demonstrates strong stability and dependable performance."
+    elif label == "Consistent":
+        return "The player shows good consistency with minor fluctuations."
+    elif label == "Moderately Consistent":
+        return "The player shows moderate stability with noticeable variation."
+    else:
+        return "The player is highly inconsistent with large performance swings."

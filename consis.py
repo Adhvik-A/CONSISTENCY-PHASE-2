@@ -14,6 +14,22 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.get("/health")
+def health():
+    return {"status": "ok", "service": "consistency-api"}
+
+
+# =============================
+# DESCRIPTION
+# =============================
+@app.get("/description")
+def description():
+    return {
+        "name": " Batting Consistency API",
+        "version": "2.2",
+        "objective": "Measures batting consistency over time",
+        "status": "active"
+    }
 
 @app.post("/consistency", response_model=ConsistencyResponse)
 def get_consistency(payload: ConsistencyRequest):
