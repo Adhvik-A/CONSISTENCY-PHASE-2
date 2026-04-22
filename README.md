@@ -1,29 +1,27 @@
- Batting Consistency API
-________________________________________
- API Name
+ # Batting Consistency API
+
+ # API Name
 Batting Consistency API
-________________________________________
- Objective
+
+# Objective
 This API measures how consistently a batter performs across innings by analyzing average performance, variability, and failure tendency.
 It helps determine whether a player is stable and reliable or highly inconsistent across matches.
-________________________________________
- Scientific Principle
+
+ # Scientific Principle
 The model is based on classical statistics:
 •	Arithmetic Mean (central tendency)
 •	Standard Deviation (dispersion)
 •	Normalized deviation (relative volatility)
 •	Threshold-based failure penalty
-________________________________________
 
-________________________________________
- Sample Input
+ # Sample Input
 { 
 "player_name": "Virat Kohli", 
 "team": "RCB", 
 "runs": [45, 12, 78, 5, 50], 
 "wickets": [1, 1, 0, 1, 0] 
-}________________________________________
- Sample Output
+}
+# Sample Output
 { "player_name": "Virat Kohli", 
 "team": "RCB", 
 "mean_runs": 38.0, 
@@ -32,7 +30,7 @@ ________________________________________
 "consistency_index": 39.12, 
 "consistency_label": "Moderately Consistent", 
 "consistency_statement": "Noticeable variation in performance across innings with moderate stability." 
-}________________________________________
+}
  Input Schema
 {
   "player_name": "string",
@@ -50,22 +48,21 @@ ________________________________________
   "consistency_index": "float",
   "consistency_label": "string",
   "consistency_statement": "string"
-}________________________________________
+}
 Categories of Performance
 BCI Score	Label
 ≥ 70	Highly Consistent
 50–69	Consistent
 30–49	Moderately Consistent
 < 30	Unstable
-________________________________________
-________________________________________
+
  Validation Errors
 •	runs list cannot be empty
 •	innings must match length of runs
 •	all runs must be non-negative
 •	Wickets not in {0,1}
 •	if mean = 0 → BCI = 0
-________________________________________
+
  Summary
 This API converts raw batting scores into a statistically normalized consistency index using mean performance, dispersion, and failure penalty to evaluate player reliability.
 
