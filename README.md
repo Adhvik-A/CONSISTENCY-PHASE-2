@@ -31,14 +31,14 @@ The model is based on classical statistics:
 "consistency_label": "Moderately Consistent", 
 "consistency_statement": "Noticeable variation in performance across innings with moderate stability." 
 }
- Input Schema
+ # Input Schema
 {
   "player_name": "string",
   "team": "string",
   "runs": "List[int]",
   "wickets": "List[int]  // 1 = out, 0 = not out"
 }
- Output Schema
+ # Output Schema
 {
   "player_name": "string",
   "team": "string",
@@ -49,21 +49,21 @@ The model is based on classical statistics:
   "consistency_label": "string",
   "consistency_statement": "string"
 }
-Categories of Performance
+# Categories of Performance
 BCI Score	Label
 ≥ 70	Highly Consistent
 50–69	Consistent
 30–49	Moderately Consistent
 < 30	Unstable
 
- Validation Errors
+ # Validation Errors
 •	runs list cannot be empty
 •	innings must match length of runs
 •	all runs must be non-negative
 •	Wickets not in {0,1}
 •	if mean = 0 → BCI = 0
 
- Summary
+ # Summary
 This API converts raw batting scores into a statistically normalized consistency index using mean performance, dispersion, and failure penalty to evaluate player reliability.
 
 
