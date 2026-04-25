@@ -1,4 +1,4 @@
-from utils import *
+from utils import calculate_mean, calculate_std, calculate_failure_rate, calculate_bci
 from fastapi import HTTPException
 
 
@@ -25,7 +25,7 @@ class BattingConsistencyService:
 
         bci = calculate_bci(p, q, r)
 
-        # ---------------- LABEL ----------------
+        # ---------------- LABELING ----------------
         if bci >= 70:
             label = "Highly Consistent"
             statement = "Strong and reliable performance."
@@ -53,7 +53,7 @@ class BattingConsistencyService:
             "failure_rate": round(r, 2),
             "consistency_index": round(bci, 2),
 
-            "sample_size": self.n,   # ✅ ADDED
+            "sample_size": self.n,
 
             "consistency_label": label,
             "consistency_statement": statement
