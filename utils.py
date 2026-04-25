@@ -22,7 +22,6 @@ def calculate_failure_rate(runs, mean, wickets):
 
         base = max(0, (T - x) / T)
 
-        # wicket impact
         weight = 1.2 if w == 1 else 0.7
 
         total += base * weight
@@ -33,26 +32,8 @@ def calculate_failure_rate(runs, mean, wickets):
 def calculate_bci(p, q, r):
     if p == 0:
         return 0
-    return (1 - q / p) * (1 - r) * 100
 
+    bci = (1 - q / p) * (1 - r) * 100
 
-def get_label(bci):
-    if bci >= 70:
-        return "Highly Consistent"
-    elif bci >= 50:
-        return "Consistent"
-    elif bci >= 30:
-        return "Moderately Consistent"
-    else:
-        return "Unstable"
-
-
-def get_statement(label):
-    if label == "Highly Consistent":
-        return "The player demonstrates strong stability and dependable performance."
-    elif label == "Consistent":
-        return "The player shows good consistency with minor fluctuations."
-    elif label == "Moderately Consistent":
-        return "The player shows moderate stability with noticeable variation."
-    else:
-        return "The player is highly inconsistent with large performance swings."
+    # ✅ CLAMP FIX
+    return max(0, min(100, bci))

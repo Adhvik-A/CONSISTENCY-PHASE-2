@@ -1,0 +1,14 @@
+{
+  "player_id": "IPL_RCB_18",
+  "match_id": "IPL2026_MATCH_12",
+  "innings_id": "INN_1",
+
+  "player_name": "Virat Kohli",
+  "team": "RCB",
+
+  "runs": [67, 12, 45, 89, 23, 0, 54, 38, 71, 9],
+  "wickets": [1, 1, 0, 0, 1, 1, 0, 0, 1, 1],
+
+  "balls": [42, 18, 33, 58, 21, 2, 40, 29, 51, 10],
+  "phase": "middle"
+}
